@@ -9,7 +9,7 @@ router.get("/property", (req, res) => {
 res.send("Property Page");
 });
 
-router.ger("/community", (req, res) => {
+router.get("/community", (req, res) => {
   res.send("Community Page");
 });
 

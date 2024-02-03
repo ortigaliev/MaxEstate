@@ -2,6 +2,7 @@ console.log("Ready to start Web server");
 const express = require("express");
 const res = require("express/lib/response");
 const app = express();
+const router = require("./router");
 
 //MONGO DB connection
 const db = require("./server").db();
@@ -20,6 +21,6 @@ app.set("views", "views");//views folder path that we created
 app.set("view engine", "ejs");
 
 //4-Router related Code
-use.app("/", router);
+app.use("/", router);
 
 module.exports =app;
