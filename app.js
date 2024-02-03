@@ -4,10 +4,6 @@ const res = require("express/lib/response");
 const app = express();
 const router = require("./router");
 
-//MONGO DB connection
-const db = require("./server").db();
-const mongodb = require("mongodb");
-
 //1-Entry Code
 app.use(express.static("public")); //open Public folder for requested users
 app.use(express.json()); //Converst from json format to Object
