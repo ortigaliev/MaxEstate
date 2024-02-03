@@ -20,5 +20,6 @@ app.set("views", "views");//views folder path that we created
 app.set("view engine", "ejs");
 
 //4-Router related Code
+use.app("/", router);
 
 module.exports =app;
