@@ -1,9 +1,12 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const http = require("http");
 const mongodb = require("mongodb");
 
 
 let db;
-const connectionString = "mongodb+srv://Max_Mit7:ONHKVnH0aCQu9PQ0@mit-7.fpdtxon.mongodb.net/My_Plan";
+const connectionString = process.env.MONGO_URL;
 
 mongodb.connect(
   connectionString,
@@ -19,7 +22,7 @@ mongodb.connect(
 
     const app = require("./app");
     const server = http.createServer(app);
-    let PORT = 3001;
+    let PORT = process.env.PORT || 3001;
     server.listen(PORT, function() {
     console.log(`The server successfully run on PORT: ${PORT}, http://localhost:${PORT}`);
     });
