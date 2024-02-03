@@ -1,0 +1,14 @@
+{
+  "name": "maxestate",
+  "version": "1.0.0",
+  "description": "This is a MERN REAL ESTATE admin control panel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node sever.js",
+    "dev": "nodemon sever.js",
+    "train": "nodemon train.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Muhammadjon",
+  "license": "ISC"
+}
