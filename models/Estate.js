@@ -1,0 +1,1 @@
+const EstateModel = require("../schema/estate.model");
