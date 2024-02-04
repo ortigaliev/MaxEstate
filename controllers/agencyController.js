@@ -72,6 +72,18 @@ agencyController.logout = (req, res) => {
   res.send("logout page");
 };
 
+//Validate AUTH Agency
+agencyController.validateAuthAgency = (req, res, next) => {
+  if (req.session?.member?.mb_type === "AGENCY") {
+    req.member = req.session.member;
+    next();
+  } else
+    res.json({
+      state: "fail", message: "Only authenticated members with agency type",
+    });
+};
+
+
 //check-me controller
 agencyController.checkSession = (req, res) => {
   if (req.session?.member){

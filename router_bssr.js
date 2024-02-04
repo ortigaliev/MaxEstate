@@ -1,6 +1,7 @@
 const express = require("express");
 const router_bssr = express.Router();
 const agencyController = require("./controllers/agencyController");
+const estateController = require("./controllers/estateController");
 
 /* **********************
 *        BSSR EJS       *
@@ -17,10 +18,12 @@ router_bssr
 .post("/login", agencyController.loginProcess);//login router
 
 router_bssr.get("/logout", agencyController.logout);//logout router
-
 router_bssr.get("/check-me", agencyController.checkSession);//
 
+
 router_bssr.get("/estate/list", agencyController.getMyAgencyData);
+router_bssr.post("/estate/create", agencyController.validateAuthAgency,estateController.addNewEstate);
+router_bssr.post("/estate/edit/:id", estateController.updateChosenEstate);
 
 
 module.exports = router_bssr;
