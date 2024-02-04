@@ -18,6 +18,8 @@ router_bssr
 
 router_bssr.get("/logout", agencyController.logout);//logout router
 
+router_bssr.get("/check-me", agencyController.checkSession);//
+
 router_bssr.get("/estate/list", agencyController.getMyAgencyData);
 
 
