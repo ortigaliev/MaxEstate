@@ -15,6 +15,7 @@ estateController.addNewEstate = async (req, res) =>{
     console.log(req.member);
 
     //TODO Product creation development;
+    res.send("ok");
   } catch (err) {
     console.log(`ERROR, cont/addNewEstate, ${err.message}`);
   }
