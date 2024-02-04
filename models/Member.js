@@ -20,8 +20,7 @@ class Member {
         console.log(mongo_err);
         throw new Error(Definer.auth_err1);
       }
-
-      result.mb_password = "";
+      console.log(result);
       return result;
     } catch (err) {
       throw err;
