@@ -27,7 +27,7 @@ router_bssr.post("/estate/create",
   agencyController.validateAuthAgency,
   uploader_product.array("estate_images", 5),
   estateController.addNewEstate);
-router_bssr.post("/estate/edit/:id", estateController.updateChosenEstate);
+router_bssr.post("/estate/edit/:id", agencyController.validateAuthAgency, estateController.updateChosenEstate);
 
 
 module.exports = router_bssr;

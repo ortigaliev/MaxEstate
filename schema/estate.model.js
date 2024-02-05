@@ -4,6 +4,7 @@ const {
   estate_status_enums,
   estate_owner_enums,
   estate_rental_enums,
+  estate_rent_enums,
 } = require("../lib/config");
 const Schema = mongoose.Schema;
 
@@ -28,7 +29,7 @@ estateSchema = new mongoose.Schema({
   },
   estate_price: {
     type: Number,
-    required: true
+    required: true,
   },
   estate_discount: {
     type: Number,
@@ -51,14 +52,14 @@ estateSchema = new mongoose.Schema({
       message: "{VALUE}, is not among permitted enum values",
     },
   },
-  estate_rental: {
+  estate_rent: {
     type: String,
     default: "월세",
     required: function () {
     return (this.estate_collection === "rent")
     },
     enum: {
-      values: estate_rental_enums,
+      values: estate_rent_enums,
       message: "{VALUE}, is not among permitted enum values",
     },
   },
@@ -85,12 +86,12 @@ estateSchema = new mongoose.Schema({
     type:Schema.Types.ObjectId,
     ref: "Member",
     required: false
-  }
+  },
 },
   {timestamps: true});//createdAt, updeatedAt
 
-estate_Schema.index(
-  {agency_mb_id: 1, estate_name: 1, estate_size: 1, estate_volume: 1},
+estateSchema.index(
+  {agency_mb_id: 1, estate_name: 1, estate_size: 1, estate_rent: 1},//Doesnt allow add new product with same param 2 restaurant
   {unique: true}
 );
 
