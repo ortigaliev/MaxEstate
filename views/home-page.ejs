@@ -1,0 +1,77 @@
+<%- include('includes/header') %>
+<link rel="stylesheet" href="/css/home.css">
+<body>
+  <!-- NAVBAR SECTION-->
+  <div class="group-name">
+    <ul class="nav justify-content-center">
+      <li class="nav-item"style="cursor: pointer">
+        <a class="nav-link active" href="/prop">Home</a>
+      </li>
+        <% if(!member) { %>
+        <li class="nav-item"style="cursor: pointer">
+          <a class="nav-link" href="/prop/signup">Signup</a>
+        </li>
+        <li class="nav-item"style="cursor: pointer">
+          <a class="nav-link" href="/prop/login">Login</a>
+        </li>
+        <% } else if (member.mb_type === "ADMIN") { %>
+          <li class="nav-item"style="cursor: pointer">
+            <a class="nav-link" href="/prop/all-restaurant">All Agency</a>
+          </li>
+          <li class="nav-item" style="cursor: pointer" onclick="return confirm('Do you want to log out?')">
+            <a class="nav-link" href="/prop/logout">Logout</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item" style="cursor: pointer">
+              <a class="nav-link" href="/prop/estate/list">My Agency</a>
+            </li>
+            <li class="nav-item" style="cursor: pointer" onclick="return confirm('Do you want to log out?')">
+              <a class="nav-link" href="/prop/logout">Logout</a>
+            </li>
+            <% } %>
+          </ul>
+  </div>
+
+        <!-- ANIME.JS -->
+        <div class="wrapper"></div>
+
+        <script>
+          const wrapperEl = document.querySelector('.wrapper');
+          const numberOfEls = 90;
+          const duration = 6000;
+          const delay = duration / numberOfEls;
+
+          let tl = anime.timeline({
+            duration: delay,
+            complete: function() { tl.restart(); }
+          });
+
+          function createEl(i) {
+            let el = document.createElement('div');
+            const rotate = (360 / numberOfEls) * i;
+            const translateY = -50;
+            const hue = Math.round(360 / numberOfEls * i);
+            el.classList.add('el');
+            el.style.backgroundColor = 'hsl(' + hue + ', 40%, 60%)';
+            el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
+            tl.add({
+              begin: function() {
+                anime({
+                  targets: el,
+                  backgroundColor: ['hsl(' + hue + ', 40%, 60%)', 'hsl(' + hue + ', 60%, 80%)'],
+                  rotate: [rotate + 'deg', rotate + 10 +'deg'],
+                  translateY: [translateY + '%', translateY + 10 + '%'],
+                  scale: [1, 1.25],
+                  easing: 'easeInOutSine',
+                  direction: 'alternate',
+                  duration: duration * .1
+                });
+              }
+            });
+            wrapperEl.appendChild(el);
+          };
+
+          for (let i = 0; i < numberOfEls; i++) createEl(i);
+        </script>
+</body>
+<%- include('includes/footer') %>

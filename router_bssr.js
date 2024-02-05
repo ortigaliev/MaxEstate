@@ -9,6 +9,7 @@ const uploader_product = require("./utils/upload-multer")("estate");
 *************************/
 
 //Restaurant releted router
+router_bssr.get("/", agencyController.home);
 
 router_bssr
 .get("/signup",agencyController.getSignupMyAgency)//signup router
