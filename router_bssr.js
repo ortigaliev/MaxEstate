@@ -22,7 +22,7 @@ router_bssr.get("/logout", agencyController.logout);//logout router
 router_bssr.get("/check-me", agencyController.checkSession);//
 
 
-router_bssr.get("/estate/list", agencyController.getMyAgencyData);
+router_bssr.get("/estate/list", agencyController.getMyAgencyEstate);
 router_bssr.post("/estate/create",
   agencyController.validateAuthAgency,
   uploader_product.array("estate_images", 5),

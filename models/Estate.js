@@ -8,6 +8,21 @@ class Estate {
   constructor() {
     this.estateModel = EstateModel;
   }
+
+  async getAllEstateDataAgency(member) {
+    try{
+      member._id = shapeIntoMongooseObjectId(member._id);
+      const result = await this.estateModel.find({
+        agency_mb_id: member._id,
+      });
+      assert.ok(result, Definer.general_err1);
+      /* console.log("", result) */
+      return result;
+    }catch (err) {
+      throw err;
+    }
+  }
+
   async addNewEstateData(data, member) {
     try {
       data.agency_mb_id = shapeIntoMongooseObjectId(member._id);//mb_id turns into mobgodb _id

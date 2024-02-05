@@ -1,14 +1,15 @@
 const Member = require("../models/Member");
+const Estate = require("../models/Estate");
 let agencyController = module.exports;
 
-agencyController.getMyAgencyData = async (req, res) =>{
+agencyController.getMyAgencyEstate = async (req, res) =>{
   try{
-    console.log("GET: cont/getMyAgencyData");
-
-    //TODO: Get my restaurant products
-    res.render("agency-list");
-  } catch {
-    console.log(`ERROR, cont/getMyAgencyData, ${err.message}`);
+    console.log("GET: cont/getMyAgencyEstate");
+    const estate = new Estate();
+    const data = await estate.getAllEstateDataAgency(res.locals.member);
+    res.render("agency-list", {agency_data: data});
+  } catch (err) {
+    console.log(`ERROR, cont/getMyAgencyEstate, ${err.message}`);
     res.json({state: "fail", message: err.message});
   }
 }
