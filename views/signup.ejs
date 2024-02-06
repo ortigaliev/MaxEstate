@@ -3,8 +3,9 @@
   <link rel="stylesheet" type="text/css" href="/css/signup.css">
 <body>
   <form
+  onsubmit="return validateSignUpForm()"
   class="login_container"
-  action="/resto/signup"
+  action="/prop/signup"
   method="POST"
   enctype="multipart/form-data">
 
@@ -21,12 +22,12 @@
       <div class="sign_input_frame">
         <div class="sign_up_frame">
           <label>User ID</label>
-          <input type="text" name="mb_nick" placeholder="User ID" value="" required>
+          <input class="mb_nick" type="text" name="mb_nick" placeholder="User ID" value="" required>
         </div>
 
         <div class="sign_up_frame">
           <label>Phone number</label>
-          <input type="text" name="mb_phone" placeholder="Phone number" value="" required>
+          <input class="mb_phone" type="text" name="mb_phone" placeholder="Phone number" value="" required>
         </div>
       </div>
 
@@ -34,12 +35,12 @@
       <div class="sign_input_frame">
         <div class="sign_up_frame">
           <label>Password</label>
-          <input type="password" name="mb_password" placeholder="Password" value="" required>
+          <input class="mb_password" type="password" name="mb_password" placeholder="Password" value="" required>
         </div>
 
         <div class="sign_up_frame">
           <label>Confirm your password</label>
-          <input type="password" name="mb_confirm_password" placeholder="Confirm your password" value="" required>
+          <input class="mb_confirm_password" type="password" name="mb_confirm_password" placeholder="Confirm your password" value="" required>
         </div>
       </div>
 
@@ -50,12 +51,12 @@
             <span class="media_text">Agency Image</span>
             <div class="filebox bs3-primary preview-images">
               <input class="upload-name" value="Choose file" disabled="disabled">
-              <label>Upload image</label>
+              <label for="input_file">Upload image</label>
               <input
               type="file"
               id="input_file"
               name="agency_img"
-              class="upload-hiddin form-control-file restaurant_img">
+              class="upload-hiddin form-control-file agency_img">
             </div>
 
             <p class="thumbnail_desc">Please upload your Restaurant image.
@@ -70,6 +71,57 @@
 
     </div>
   </form>
+
+  <script>
+
+$(function () {
+    let fileTarget = $(".filebox .upload-hiddin");
+    let filename = "";
+    fileTarget.on("change", function () {
+      if (window.FileReader) {
+        const uploading_file = $(this)[0].files[0];
+        const fileType = uploading_file["type"];
+        const validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
+        if (!validImageTypes.includes(fileType)) {
+          alert ("Please upload required file: jpg, jpeg va png!");
+        } else {
+          if (uploading_file) {
+            console.log(URL.createObjectURL(uploading_file));
+            $(".upload_img_frame")
+            .attr("src", URL.createObjectURL(uploading_file))
+            .addClass("success");
+          }
+          filename = uploading_file.name;
+        }
+      }
+      $(this).siblings(".upload-name").val(filename);
+    });
+  });
+
+
+    function validateSignUpForm() {
+    const mb_nick = $(".mb_nick").val();
+    const mb_phone = $(".mb_phone").val();
+    const mb_password = $(".mb_password").val();
+    const mb_confirm_password = $(".mb_confirm_password").val();
+    const agency_img = $(".agency_img").get(0).files[0] ?? null;
+
+    if (mb_nick == "" || mb_phone == "" || mb_password == "" || mb_confirm_password == "" ) {
+      alert("Please complete all the fields");
+      return false;
+
+    } else if (mb_password !== mb_confirm_password) {
+      alert(`Please enter password correctly`);
+      return false;
+    }
+    if (!agency_img) {
+      alert("Please upload image");
+      return false;
+    }
+    return true;
+  }
+  </script>
+
 </body>
 
 <%- include('includes/footer') %>
