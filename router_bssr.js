@@ -3,6 +3,7 @@ const router_bssr = express.Router();
 const agencyController = require("./controllers/agencyController");
 const estateController = require("./controllers/estateController");
 const uploader_product = require("./utils/upload-multer")("estate");
+const uploader_members = require("./utils/upload-multer")("members");
 
 /* **********************
 *        BSSR EJS       *
@@ -13,7 +14,7 @@ router_bssr.get("/", agencyController.home);
 
 router_bssr
 .get("/signup",agencyController.getSignupMyAgency)//signup router
-.post("/signup",agencyController.signupProcess);//signup router
+.post("/signup",uploader_members.single('agency_img'), agencyController.signupProcess);//signup router
 
 router_bssr
 .get("/login", agencyController.getLoginMyAgency)//login router
