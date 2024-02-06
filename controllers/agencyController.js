@@ -36,7 +36,7 @@ agencyController.getSignupMyAgency = async (req, res) =>{
 
 agencyController.signupProcess = async (req, res) => {
   try{
-    console.log("POST: cont/signup");
+    console.log("POST: cont/signupProcess");
     const data = req.body,
     member = new Member(),
     new_member = await member.signupData(data);
@@ -44,7 +44,7 @@ agencyController.signupProcess = async (req, res) => {
     req.session.member = new_member;
     res.redirect("/prop/estate/list");
   } catch (err) {
-    console.log(`ERROR, cont/signup, ${err.message}`);
+    console.log(`ERROR, cont/signupProcess, ${err.message}`);
     res.json({state: "fail", message: err.message});
   }
 };
@@ -62,17 +62,17 @@ agencyController.getLoginMyAgency = async (req, res) =>{
 
 agencyController.loginProcess = async (req, res) => {
   try{
-    console.log("POST: cont/login");
+    console.log("POST: cont/loginProcess");
     const data = req.body,
     member = new Member(),
     result = await member.loginData(data);
 
     req.session.member = result;
     req.session.save(function () {
-      res.redirect("/prop/estate/list");
+      result.mb_type === "ADMIN" ? res.redirect(".prop/all-astete") : res.redirect("/prop/estate/list");
     });
   } catch (err) {
-    console.log(`ERROR, const/login, ${err.message}`);
+    console.log(`ERROR, const/loginProcess, ${err.message}`);
     res.json({state: "fail", message: err.message});
   }
 };
