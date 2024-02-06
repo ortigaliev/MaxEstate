@@ -1,115 +1,75 @@
 <%- include('includes/header') %>
-<link rel="stylesheet" href="/css/signup.css">
 <body>
-  <div class="page">
-    <div class="container">
-      <div class="signup_wrapper">
-          <form class="signup_form" action="/prop/estate" method="POST" enctype="multipart/form-data">
-            <div class="form">
-              <div>
-                <label for="">User ID</label>
-                <input type="text" id="mb_nick" name="mb_nick" value="" placeholder="Enter your ID">
-              </div>
-              <div>
-                <label for="">User phone</label>
-                <input type="text" id="mb_phone" class="mb_phone" value="" placeholder="Enter your phone">
-              </div>
-            </div>
-            <div class="form">
-              <div>
-                <label for="">Password</label>
-                <input type="password" id="mb_password" name="mb_password" value="" placeholder="Enter your password">
-              </div>
-              <div>
-                <label for="">Confirm your paswword</label>
-                <input type="password" id="mb_confirm_password" class="mb_confirm_password" value="" placeholder="Enter your phone">
-              </div>
-            </div>
+  <link rel="stylesheet" type="text/css" href="/css/signup.css">
+<body>
+  <form
+  class="login_container"
+  action="/resto/signup"
+  method="POST"
+  enctype="multipart/form-data">
 
-            <div class="upload_root">
-              <div class="img_upload_wrapper">
-                <div class="img_upload_frame">
-                  <img class="agency_img" src="/img/kitchen-1687121_1280.jpg" alt="Agency_img">
-                </div>
-                <div class="img_upload_info_frame">
-                  <span class="img_upload_info-text">Upload Agency Image</span>
-                  <div class="filebox bs3-primary preview-images">
-                    <input
-                    type="file"
-                    id="input_file"
-                    value="Upload img"
-                    name="agency_img"
-                    class="upload-hiddin form-control-file agency_img"/>
-                  </div>
-                  <p class="thumbnail_desc">Please upload your Agency image.
-                    <br class="import">Note: Please upload jpg,jpeg or png files <br> Image doesn't cointain text!
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="bottom_link">
-              <span class="b"><a href="prop/">Home</a> OR <a href="/prop/login"> Already SIGNED UP?</a></span>
-              <button class="signup_btn" type="submit" id="signup_submit">Sign up</button>
-            </div>
-          </form>
+    <div class="login_frame" style="width: 650px; height: 730px;">
+
+      <div class="login_top">
+        <span>Sign Up</span>
+        <div>
+          Back to Main Page <a href="/prop" style="color: #6440fb">Home</a>
+        </div>
+        <p>Already a member? <a href="/prop/login" style="color: #6440fb">Sign In</a></p>
       </div>
 
+      <div class="sign_input_frame">
+        <div class="sign_up_frame">
+          <label>User ID</label>
+          <input type="text" name="mb_nick" placeholder="User ID" value="" required>
+        </div>
+
+        <div class="sign_up_frame">
+          <label>Phone number</label>
+          <input type="text" name="mb_phone" placeholder="Phone number" value="" required>
+        </div>
+      </div>
+
+      <!-- PASSWORD SECTION -->
+      <div class="sign_input_frame">
+        <div class="sign_up_frame">
+          <label>Password</label>
+          <input type="password" name="mb_password" placeholder="Password" value="" required>
+        </div>
+
+        <div class="sign_up_frame">
+          <label>Confirm your password</label>
+          <input type="password" name="mb_confirm_password" placeholder="Confirm your password" value="" required>
+        </div>
+      </div>
+
+      <div class="login_input_frame">
+        <div class="media-frame">
+          <img class="upload_img_frame" src="/img/apartmenr.jpg" alt="resto_img_required">
+          <div class="upload_container">
+            <span class="media_text">Agency Image</span>
+            <div class="filebox bs3-primary preview-images">
+              <input class="upload-name" value="Choose file" disabled="disabled">
+              <label>Upload image</label>
+              <input
+              type="file"
+              id="input_file"
+              name="agency_img"
+              class="upload-hiddin form-control-file restaurant_img">
+            </div>
+
+            <p class="thumbnail_desc">Please upload your Restaurant image.
+              <br>Note: Please upload required img format(jpg,jpeg or png) <br> Image doesn't cointain text!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RO"YHATDAN O"TISH BUTTON -->
+      <button class="login_btn btn" name="signup" type="submit">Sign Up</button>
+
     </div>
-</div>
-
-
-
-<script>
-  const current = null;
-  document.querySelector('#email').addEventListener('focus', function(e) {
-    if (current) current.pause();
-    current = anime({
-      targets: 'path',
-      strokeDashoffset: {
-        value: 0,
-        duration: 700,
-        easing: 'easeOutQuart'
-      },
-      strokeDasharray: {
-        value: '240 1386',
-        duration: 700,
-        easing: 'easeOutQuart'
-      }
-    });
-  });
-  document.querySelector('#password').addEventListener('focus', function(e) {
-    if (current) current.pause();
-    current = anime({
-      targets: 'path',
-      strokeDashoffset: {
-        value: -336,
-        duration: 700,
-        easing: 'easeOutQuart'
-      },
-      strokeDasharray: {
-        value: '240 1386',
-        duration: 700,
-        easing: 'easeOutQuart'
-      }
-    });
-  });
-  document.querySelector('#submit').addEventListener('focus', function(e) {
-    if (current) current.pause();
-    current = anime({
-      targets: 'path',
-      strokeDashoffset: {
-        value: -730,
-        duration: 700,
-        easing: 'easeOutQuart'
-      },
-      strokeDasharray: {
-        value: '530 1386',
-        duration: 700,
-        easing: 'easeOutQuart'
-      }
-    });
-  });
-</script>
+  </form>
 </body>
 
 <%- include('includes/footer') %>
