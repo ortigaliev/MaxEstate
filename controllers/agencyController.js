@@ -87,8 +87,15 @@ agencyController.loginProcess = async (req, res) => {
 
 //loguot controller
 agencyController.logout = (req, res) => {
-  console.log("GET contr.logout");
-  res.send("logout page");
+  try{
+    console.log("GET cont/logout");
+    req.session.destroy(function () {
+      res.redirect("/prop");
+    });
+  } catch(err) {
+    console.log(`ERROR, cont/logout, ${err.message}`);
+    res.json({ state: "fail", message: err.message});
+  }
 };
 
 //Validate AUTH Agency
