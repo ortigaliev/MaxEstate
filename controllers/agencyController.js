@@ -22,7 +22,7 @@ agencyController.getMyAgencyEstate = async (req, res) =>{
     res.render("agency-list", {agency_data: data});
   } catch (err) {
     console.log(`ERROR, cont/getMyAgencyEstate, ${err.message}`);
-    res.json({state: "fail", message: err.message});
+    res.redirect("/prop");
   }
 }
 

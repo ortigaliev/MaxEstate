@@ -1,15 +1,64 @@
 <%- include('includes/header') %>
-
+<link rel="stylesheet" type="text/css" href="/css/list.css">
 <body>
-  <h1>My Agency page</h1>
+  <body>
+    <div id="main_container">
 
-  <% if(!member) { %>
-  <h2>You are not authenticated</h2>
-  <% } else { %>
-  <h1>You are authenticated. Your id <%= member.mb_nick%>
-    <p>Your phone is <%= member.mb_phone%></p>
-  </h1>
-  <% } %>
+      <div class="group_name">
+        <ul class="nav justify-content-center">
+
+          <li class="nav-item"style="cursor: pointer">
+            <a class="nav-link active" href="/prop">Home</a>
+          </li>
+
+          <li class="nav-item"style="cursor: pointer">
+            <a class="nav-link" href="/prop/estate/list">My Agency</a>
+          </li>
+          <li class="nav-item"style="cursor: pointer">
+            <a class="nav-link" href="/resto/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="agency_menu_frame">
+        <div class="agency_container">
+          <div class="estate_table">
+            <span class="new_estate_text"><%= member.mb_nick.toUpperCase() %> Property list</span>
+            <table class="table table-bordered table-hover">
+              <thead class="thead-light">
+                <th scope="col">№</th>
+                <th scope="col">Property name</th>
+                <th scope="col">Property type</th>
+                <th scope="col">Property size</th>
+                <th scope="col">Property price</th>
+                <th scope="col">Availabe Property</th>
+                <th scope="col">Property status</th>
+              </thead>
+
+              <% agency_data.map((value, key) => { %>
+                <tbody style="background: white">
+                  <td><%= key + 1 %></td>
+                  <td><%= value.estate_name %></td>
+                  <td><%= value.estate_collection %></td>
+                  <td><%= value.estate_collection === 'rent' ? value.estate_rent : value.estate_type %></td>
+                  <td><%= value.estate_price %></td>
+                  <td><%= value.estate_left_cnt %></td>
+                  <td>
+                    <select class="spec_select" id="<%= value._id %>">
+                      <option value="PAUSED" <%= value.estate_status ==='PAUSED' ? 'selected' : '' %>>PAUSED</option>
+                      <option value="PROCESS" <%= value.estate_status ==='PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                    </select>
+                  </td>
+                </tbody>
+                <% }); %>
+            </table>
+          </div>
+
+          <form action=""></form>
+        </div>
+      </div>
+
+    </div>
 </body>
 
 <%- include('includes/footer') %>
