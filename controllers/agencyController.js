@@ -77,7 +77,7 @@ agencyController.loginProcess = async (req, res) => {
 
     req.session.member = result;
     req.session.save(function () {
-      result.mb_type === "ADMIN" ? res.redirect(".prop/all-astete") : res.redirect("/prop/estate/list");
+      result.mb_type === "ADMIN" ? res.redirect("/prop/all-agency") : res.redirect("/prop/estate/list");
     });
   } catch (err) {
     console.log(`ERROR, const/loginProcess, ${err.message}`);
@@ -117,4 +117,32 @@ agencyController.checkSession = (req, res) => {
   } else {
     res.json({ state: "fail", message: "You are not authenticated"});
   }
-}
+};
+
+//Admin user controll logic.
+agencyController.validateAdmin = (req, res, next) => {
+  if (req.session?.member?.mb_type === "ADMIN") {
+    req.member = req.session.member;
+    next();
+  } else {
+    const html = `<script>
+                    alert('Admin page: Permission denied!');
+                    window.location.replace('/prop');
+                  </script>`;
+    res.end(html);
+  }
+};
+
+//All Agency control panel for admin
+agencyController.getAllAgency = async (req, res) => {
+  try {
+    console.log("GET cont/getAllAgency");
+
+    // todo: retrieve all agencys from DB
+
+    res.render("all-agency");
+  } catch (err) {
+    console.log(`ERROR, cont/getAllAgency, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};

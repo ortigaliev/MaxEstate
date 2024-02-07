@@ -9,7 +9,7 @@ const uploader_members = require("./utils/upload-multer")("members");
 *        BSSR EJS       *
 *************************/
 
-//Restaurant releted router
+//agency releted router
 router_bssr.get("/", agencyController.home);
 
 router_bssr
@@ -31,5 +31,10 @@ router_bssr.post("/estate/create",
   estateController.addNewEstate);
 router_bssr.post("/estate/edit/:id", agencyController.validateAuthAgency, estateController.updateChosenEstate);
 
+router_bssr.get(
+  "/all-agency",
+  agencyController.validateAdmin,
+  agencyController.getAllAgency
+);
 
 module.exports = router_bssr;

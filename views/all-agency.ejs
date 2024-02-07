@@ -1,0 +1,61 @@
+<%- include('includes/header') %>
+
+<link rel="stylesheet" type="text/css" href="/css/list.css" />
+
+<body>
+  <div id="main_container">
+    <div class="group_name">
+      <ul class="nav justify-content-center">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link active" href="/prop">Home</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/prop/all-agency">AllAgency</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/prop/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="agency_menu_frame">
+      <div class="agency_container">
+        <div class="agency_table">
+          <span class="new_estate_txt">List of All Agency</span>
+          <table class="table table-hover table-sm">
+            <thead class="thead-light">
+              <tr class="thead-light">
+                <th scope="col">No.</th>
+                <th scope="col">Agency name</th>
+                <th scope="col">Agency phone</th>
+                <th scope="col">Agency TOP</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+
+            <tbody style="background: white">
+              <td>1</td>
+              <td>Homier</td>
+              <td>01093712123</td>
+              <td style="width: 13%">
+                <label class="switch">
+                  <input type="checkbox" class="mb_top" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td style="width: 13%">
+                <select class="spec_select mb_status">
+                  <option value="ONPAUSE">ONPAUSE</option>
+                  <option value="ACTIVE">ACTIVE</option>
+                  <option value="DELETED">DELETED</option>
+                </select>
+              </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<%- include('includes/footer') %>
