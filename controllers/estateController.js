@@ -28,7 +28,7 @@ estateController.addNewEstate = async (req, res) =>{
     assert.ok(result, Definer.estate_err1);
     const html = `<script>
                     alert("new estate added successfully");
-                    window.location.replace("/prop/estate/menu");
+                    window.location.replace("/prop/estate/list");
                   </script>`; //if estate added successfully it send a estate sucessfuly
     res.end(html);
     res.send("ok");

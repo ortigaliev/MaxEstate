@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const {
   estate_collection_enums,
   estate_status_enums,
-  estate_owner_enums,
-  estate_rental_enums,
+  estate_type_enums,
   estate_rent_enums,
 } = require("../lib/config");
 const Schema = mongoose.Schema;
@@ -45,10 +44,10 @@ estateSchema = new mongoose.Schema({
     default: "two-room",
     required: function() {
       const type_list = ["apartment","willa","house","pent-house", "office"];
-      return type_list.includes(this.estate_collectiont)
+      return type_list.includes(this.estate_collection)
     },
     enum: {
-      values: estate_owner_enums,
+      values: estate_type_enums,
       message: "{VALUE}, is not among permitted enum values",
     },
   },

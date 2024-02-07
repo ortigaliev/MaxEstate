@@ -1,64 +1,261 @@
 <%- include('includes/header') %>
 <link rel="stylesheet" type="text/css" href="/css/list.css">
+
 <body>
-  <body>
-    <div id="main_container">
+  <div id="main_container">
 
-      <div class="group_name">
-        <ul class="nav justify-content-center">
+    <div class="group_name">
+      <ul class="nav justify-content-center">
 
-          <li class="nav-item"style="cursor: pointer">
-            <a class="nav-link active" href="/prop">Home</a>
-          </li>
+        <li class="nav-item"style="cursor: pointer">
+          <a class="nav-link active" href="/prop">Home</a>
+        </li>
 
-          <li class="nav-item"style="cursor: pointer">
-            <a class="nav-link" href="/prop/estate/list">My Agency</a>
-          </li>
-          <li class="nav-item"style="cursor: pointer">
-            <a class="nav-link" href="/resto/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
+        <li class="nav-item"style="cursor: pointer">
+          <a class="nav-link" href="/prop/estate/list">MyAgency</a>
+        </li>
+        <li class="nav-item"style="cursor: pointer">
+          <a class="nav-link" href="/prop/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="agency_menu_frame">
-        <div class="agency_container">
-          <div class="estate_table">
-            <span class="new_estate_text"><%= member.mb_nick.toUpperCase() %> Property list</span>
-            <table class="table table-bordered table-hover">
-              <thead class="thead-light">
-                <th scope="col">№</th>
-                <th scope="col">Property name</th>
-                <th scope="col">Property type</th>
-                <th scope="col">Property size</th>
-                <th scope="col">Property price</th>
-                <th scope="col">Availabe Property</th>
-                <th scope="col">Property status</th>
-              </thead>
+    <div class="agency_menu_frame">
+      <div class="agency_container">
 
-              <% agency_data.map((value, key) => { %>
-                <tbody style="background: white">
-                  <td><%= key + 1 %></td>
-                  <td><%= value.estate_name %></td>
-                  <td><%= value.estate_collection %></td>
-                  <td><%= value.estate_collection === 'rent' ? value.estate_rent : value.estate_type %></td>
-                  <td><%= value.estate_price %></td>
-                  <td><%= value.estate_left_cnt %></td>
-                  <td>
-                    <select class="spec_select" id="<%= value._id %>">
-                      <option value="PAUSED" <%= value.estate_status ==='PAUSED' ? 'selected' : '' %>>PAUSED</option>
-                      <option value="PROCESS" <%= value.estate_status ==='PROCESS' ? 'selected' : '' %>>PROCESS</option>
-                    </select>
-                  </td>
-                </tbody>
-                <% }); %>
+        <div class="estate_table">
+          <span class="new_estate_text"><%= member.mb_nick.toUpperCase() %> Property list</span>
+          <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+              <th scope="col">№</th>
+              <th scope="col">Property name</th>
+              <th scope="col">Property type</th>
+              <th scope="col">Property size</th>
+              <th scope="col">Property price</th>
+              <th scope="col">Availabe Property</th>
+              <th scope="col">Property status</th>
+            </thead>
+
+            <% agency_data.map((value, key) => { %>
+              <tbody style="background: white">
+                <td><%= key + 1 %></td>
+                <td><%= value.estate_name %></td>
+                <td><%= value.estate_collection %></td>
+                <td><%= value.estate_collection === 'rent' ? value.estate_rent : value.estate_type %></td>
+                <td><%= value.estate_price %></td>
+                <td><%= value.estate_left_cnt %></td>
+                <td>
+                  <select class="spec_select new_estate_status"  id="<%= value._id %>">
+                    <option value="PAUSED" <%= value.estate_status ==='PAUSED' ? 'selected' : '' %>>PAUSED</option>
+                    <option value="PROCESS" <%= value.estate_status ==='PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  </select>
+                </td>
+              </tbody>
+              <% }); %>
             </table>
+            <!-- ADD NEW estate BUTTON SECTION -->
+            <div class="long_input" style="align-items: flex-end; margin-bottom: 25px;">
+              <button class="btn btn-primary hiding_btn">Add new property</button>
+            </div>
+        </div>
+
+
+        <form onsubmit="return validateForm()" class="estate_container"
+          action="/prop/estate/create"
+          method="POST"
+          enctype="multipart/form-data">
+          <div class="long_input" style="display: flex; align-items: center;">
+            <span class="new_estate_text">New Property</span>
           </div>
 
-          <form action=""></form>
-        </div>
-      </div>
+          <div>
+            <div class="long_input">
+              <label>Property Name</label>
+              <input type="text" placeholder="Property name" name="estate_name" class="estate_name">
+            </div>
+            <input name="estate_status" value="PAUSED" class="estate_status" hidden>
+          </div>
 
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Prperty Price</label>
+              <input type="number" placeholder="Propert price" name="estate_price" class="estate_price">
+            </div>
+            <div class="half_input">
+              <label>Availability Count</label>
+              <input type="number" placeholder="Aviable property" name="estate_left_cnt" class="estate_left_cnt">
+            </div>
+          </div>
+
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Property type</label>
+              <select class="estate_collection" name="estate_collection">
+                <option value="apartment" selected>Apartment</option>
+                <option value="willa">Willa</option>
+                <option value="house">House</option>
+                <option value="office">Office</option>
+                <!-- <option value="rent">Rent</option> -->
+                <option value="etc">Etc</option>
+              </select>
+            </div>
+
+            <div class="half_input" id="estate_type">
+              <label>Property type</label>
+              <select class="estate_type" name="estate_type">
+                <option value="one-room">One-room</option>
+                <option value="two-room" selected>Two-room</option>
+                <option value="family">Family</option>
+                <option value="pent-house">Pent-house</option>
+                <option value="etc">etc</option>
+              </select>
+            </div>
+
+            <div class="half_input" id="estate_rent" style="display: none;">
+              <label>Payment type</label>
+              <select class="estate_rent" name="estate_rent">
+                <option value="전세">전세</option>
+                <option value="반전세">반전세</option>
+                <option value="월세" selected>월세</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="long_input">
+            <label>Property description</label>
+            <textarea name="estate_description" class="estate_description"></textarea>
+          </div>
+
+
+          <div class="img_frame">
+            <label>Property Pictures</label>
+            <div class="media-frame">
+
+              <div class="upload_img_box">
+                <img src="/icons/upload.svg" alt="uploadImg" class="1" id="image_section_1">
+                <input type="file" id="file" name="estate_images" class="image_one"
+                onchange="previewFileHandler(this, 1)">
+              </div>
+
+              <div class="upload_img_box">
+                <img src="/icons/upload.svg" alt="uploadIMg" class="2" id="image_section_2">
+                <input type="file" id="file" name="estate_images" class="image_two"
+                onchange="previewFileHandler(this, 2)">
+              </div>
+
+              <div class="upload_img_box">
+                <img src="/icons/upload.svg" alt="uploadIMg" class="3" id="image_section_3">
+                <input type="file" id="file" name="estate_images" class="image_three"
+                onchange="previewFileHandler(this, 3)">
+              </div>
+
+              <div class="upload_img_box">
+                <img src="/icons/upload.svg" alt="uploadIMg" class="4" id="image_section_4">
+                <input type="file" id="file" name="estate_images" class="image_four"
+                onchange="previewFileHandler(this, 4)">
+              </div>
+
+              <div class="upload_img_box">
+                <img src="/icons/upload.svg" alt="uploadIMg" class="5" id="image_section_5">
+                <input type="file" id="file" name="estate_images" class="image_five"
+                onchange="previewFileHandler(this, 5)">
+              </div>
+
+              <!-- <input value="<%= member._id %>" name="restaurant_id" class="restaurant_id" hidden> -->
+            </div>
+          </div>
+
+          <div class="long_input" style="align-items: flex-end; margin-bottom: 25px;">
+            <button type="submit" class="btn btn-primary" id="submit">Create</button>
+          </div>
+        </form>
+
+      </div>
     </div>
+
+  </div>
+
+  <script>
+    $(function() {
+     /*  $(".estate_collection").on("change", () => {
+        const selected_value = $(".estate_collection").val();
+        if(selected_value === 'rent') {
+          $("#estate_rent").show();
+          $("#estate_type").hide();
+        } else {
+          $("#estate_rent").hide();
+          $("#estate_type").show();
+        }
+      }); */
+      $(".hiding_btn").on("click", () => {
+        $(".estate_container").slideToggle(500);
+        $(".hiding_btn").css("display", "none");
+      });
+
+      // estate status changer Process to Pause and Pause to Process
+
+      $(".new_estate_status").on("change", async function(e) {
+        const id = e.target.id;
+        const estate_status = $(`#${id}.new_estate_status`).val();
+        /* const mb_id = "<%= member._id %>"; */
+        try {
+          const response = await axios.post(
+          `/prop/estate/edit/${id}`,
+          {id: id, estate_status: estate_status}); // request body
+          const result = response.data;
+          console.log("result:", result);
+          
+          if(result.state == "success") {
+            alert("success");
+            location.reload();
+          } else {
+            alert(result.message);
+          }
+        } catch(err) {
+          console.log('updateChosenestate err:', err);
+        }
+      })
+
+    });
+
+
+
+    function validateForm() {
+      const agency_mb_id = $(".agency_mb_id").val(),
+      estate_name = $(".estate_name").val(),
+      estate_price = $(".estate_price").val(),
+      estate_left_cnt= $(".estate_left_cnt").val(),
+      estate_collection = $(".estate_collection").val(),
+      estate_description = $(".estate_description").val(),
+      estate_status = $(".estate_status").val();
+
+      if(agency_mb_id == '' || estate_name == '' || estate_price == '' || estate_left_cnt == '' || estate_collection == '' || estate_description == '' || estate_status == '' ) {
+        alert(`Please fill all input!`);
+        return false;
+      } else return true;
+    }
+
+    function previewFileHandler(input, order) {
+      // console.log(input);
+      const image_class_name = input.className;
+      const file = $(`.${image_class_name}`).get(0).files[0],
+      fileType = file['type'],
+      validImageTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+      if(!validImageTypes.includes(fileType)) {
+        alert(`Please upload permitted img file: jpg, jpeg, png`);
+      } else {
+        if(file) {
+          let reader = new FileReader();
+          reader.onload = function() {
+            $(`#image_section_${order}`).attr("src", reader.result);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+
+  </script>
+
 </body>
 
 <%- include('includes/footer') %>
