@@ -1,5 +1,6 @@
 const Member = require("../models/Member");
 const Estate = require("../models/Estate");
+const Agency = require("../models/Agency");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
 let agencyController = module.exports;
@@ -138,9 +139,10 @@ agencyController.getAllAgency = async (req, res) => {
   try {
     console.log("GET cont/getAllAgency");
 
-    // todo: retrieve all agencys from DB
+    const agency =new Agency();
+    const agency_data = await agency.getAllAgencyData();
+    res.render("all-agency", {agency_data: agency_data });
 
-    res.render("all-agency");
   } catch (err) {
     console.log(`ERROR, cont/getAllAgency, ${err.message}`);
     res.json({ state: "fail", message: err.message });
