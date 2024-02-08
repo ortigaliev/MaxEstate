@@ -141,6 +141,7 @@ agencyController.getAllAgency = async (req, res) => {
 
     const agency =new Agency();
     const agency_data = await agency.getAllAgencyData();
+    console.log("agency_data:", agency_data);
     res.render("all-agency", {agency_data: agency_data });
 
   } catch (err) {
@@ -148,3 +149,15 @@ agencyController.getAllAgency = async (req, res) => {
     res.json({ state: "fail", message: err.message });
   }
 };
+
+agencyController.updateAgencyByAdmin = async (req, res) =>{
+  try{
+    console.log("GET cont/updateAgencyByAdmin");
+    const agency =new Agency();
+    const result = await agency.updateAgencyByAdminData(req.body);
+    await res.json({ state: "success", data: result });
+  } catch(err) {
+    console.log(`ERROR, cont/updateAgencyByAdmin, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+  };

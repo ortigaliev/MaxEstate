@@ -37,4 +37,11 @@ router_bssr.get(
   agencyController.getAllAgency
 );
 
+router_bssr.post(
+  "/all-agency/edit",
+  agencyController.validateAdmin,
+  agencyController.updateAgencyByAdmin
+);
+
+
 module.exports = router_bssr;

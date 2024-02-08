@@ -52,12 +52,39 @@
                   </select>
                 </td>
               </tbody>
-            <% }); %>
-          </table>
+              <% }); %>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
 
-<%- include('includes/footer') %>
+
+    <script>
+      $(function() {
+
+        // manipualte agency top feature
+        $(".mb_top").on('change', function(e) {
+          const id = e.target.id;
+          const mb_top = e.target.checked ? 'Y' : 'N';
+          axios.post("/prop/all-agency/edit", {id: id, mb_top: mb_top})
+          .then(response => {
+            const result = response.data;
+            if (result.state === 'success') alert('successfullt updated');
+            else alert(result.message   )
+          })
+          .catch(err => console.log(err));
+        });
+
+      });
+
+
+
+    </script>
+
+
+
+
+  </body>
+
+  <%- include('includes/footer') %>
