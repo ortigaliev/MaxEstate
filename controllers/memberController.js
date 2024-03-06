@@ -91,10 +91,21 @@ memberController.getChosenMember = async (req, res) => {
     const id = req.params.id;
 
     const member = new Member();
-    const result = await member.getChosenMemberData(id);
+    const result = await member.getChosenMemberData(req.member,id);
     res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/getChosenMember, ${err.message}`);
     res.json({ state: "fail", message: err.message });
+  }
+};
+
+memberController.retrieveAuthMember = (req, res, next) => {
+  try {
+    const token = req.cookies["access_token"];
+    req.member = token ? jwt.verify(token, process.env.SECRET_TOKEN) : null;
+    next();
+  } catch (err) {
+    console.log(`ERROR, cont/retrieveAuthMember, ${err.message}`);
+    next();
   }
 };

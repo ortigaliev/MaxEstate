@@ -48,9 +48,11 @@ class Member {
     }
   }
 
-  async getChosenMemberData(id) {
+  async getChosenMemberData(member, id) {
     try {
       id = shapeIntoMongooseObjectId(id);
+
+      console.log("member::", member);
 
       const result = await this.memberModel
         .aggregate([
