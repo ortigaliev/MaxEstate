@@ -73,13 +73,26 @@ memberController.checkMyAuthentication = (req, res) => {
   try {
     console.log("GET cont/checkMyAuthentication");
     let token = req.cookies["access_token"];
-    console.log("token:::", token);
-    
+
     const member = token ? jwt.verify(token, process.env.SECRET_TOKEN) : null;
     assert.ok(member, Definer.auth_err2);
 
     res.json({ state: "success", data: member });
   } catch (err) {
     throw err;
+  }
+};
+
+memberController.getChosenMember = async (req, res) => {
+  try {
+    console.log("GET cont/getChosenMember");
+    const id = req.params.id;
+
+    const member = new Member();
+    const result = await member.getChosenMemberData(id);
+    res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR, cont/getChosenMember, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
   }
 };
