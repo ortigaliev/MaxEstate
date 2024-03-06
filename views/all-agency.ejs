@@ -7,13 +7,13 @@
     <div class="group_name">
       <ul class="nav justify-content-center">
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link active" href="/prop">Home</a>
+          <a class="nav-link active" href="/agency">Home</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/prop/all-agency">AllAgency</a>
+          <a class="nav-link" href="/agency/all-agency">AllAgency</a>
         </li>
         <li class="nav-item" style="cursor: pointer">
-          <a class="nav-link" href="/prop/logout">Logout</a>
+          <a class="nav-link" href="/agency/logout">Logout</a>
         </li>
       </ul>
     </div>
@@ -67,7 +67,7 @@
         $(".mb_top").on('change', function(e) {
           const id = e.target.id;
           const mb_top = e.target.checked ? 'Y' : 'N';
-          axios.post("/prop/all-agency/edit", {id: id, mb_top: mb_top})
+          axios.post("/agency/all-agency/edit", {id: id, mb_top: mb_top})
           .then(response => {
             const result = response.data;
             if (result.state === 'success') alert('successfullt updated');
@@ -82,7 +82,7 @@
           const mb_status = $(`#${id}.mb_status`).val();
           console.log("mb_status:", mb_status);
 
-          axios.post("/prop/all-agency/edit", {id: id, mb_status: mb_status})
+          axios.post("/agency/all-agency/edit", {id: id, mb_status: mb_status})
           .then(response => {
             const result = response.data;
             if (result.state === 'success') alert('successfullt updated');
