@@ -24,16 +24,16 @@
       <div class="agency_container">
 
         <div class="estate_table">
-          <span class="new_estate_text"><%= member.mb_nick.toUpperCase() %> agencyerty list</span>
+          <span class="new_estate_text"><%= member.mb_nick.toUpperCase() %> property list</span>
           <table class="table table-bordered table-hover">
             <thead class="thead-light">
               <th scope="col">№</th>
-              <th scope="col">agencyerty name</th>
-              <th scope="col">agencyerty type</th>
-              <th scope="col">agencyerty size</th>
-              <th scope="col">agencyerty price</th>
-              <th scope="col">Availabe agencyerty</th>
-              <th scope="col">agencyerty status</th>
+              <th scope="col">Property name</th>
+              <th scope="col">Property type</th>
+              <th scope="col">Property size</th>
+              <th scope="col">Property price</th>
+              <th scope="col">Availabe property</th>
+              <th scope="col">Property status</th>
             </thead>
 
             <% agency_data.map((value, key) => { %>
@@ -55,7 +55,7 @@
             </table>
             <!-- ADD NEW estate BUTTON SECTION -->
             <div class="long_input" style="align-items: flex-end; margin-bottom: 25px;">
-              <button class="btn btn-primary hiding_btn">Add new agencyerty</button>
+              <button class="btn btn-primary hiding_btn">Add new property</button>
             </div>
         </div>
 
@@ -65,13 +65,13 @@
           method="POST"
           enctype="multipart/form-data">
           <div class="long_input" style="display: flex; align-items: center;">
-            <span class="new_estate_text">New agencyerty</span>
+            <span class="new_estate_text">New property</span>
           </div>
 
           <div>
             <div class="long_input">
-              <label>agencyerty Name</label>
-              <input type="text" placeholder="agencyerty name" name="estate_name" class="estate_name">
+              <label>property Name</label>
+              <input type="text" placeholder="property name" name="estate_name" class="estate_name">
             </div>
             <input name="estate_status" value="PAUSED" class="estate_status" hidden>
           </div>
@@ -83,13 +83,13 @@
             </div>
             <div class="half_input">
               <label>Availability Count</label>
-              <input type="number" placeholder="Aviable agencyerty" name="estate_left_cnt" class="estate_left_cnt">
+              <input type="number" placeholder="Aviable property" name="estate_left_cnt" class="estate_left_cnt">
             </div>
           </div>
 
           <div class="half_input_frame">
             <div class="half_input">
-              <label>agencyerty type</label>
+              <label>property type</label>
               <select class="estate_collection" name="estate_collection">
                 <option value="apartment" selected>Apartment</option>
                 <option value="willa">Willa</option>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="half_input" id="estate_type">
-              <label>agencyerty type</label>
+              <label>property type</label>
               <select class="estate_type" name="estate_type">
                 <option value="one-room">One-room</option>
                 <option value="two-room" selected>Two-room</option>
@@ -122,13 +122,13 @@
           </div>
 
           <div class="long_input">
-            <label>agencyerty description</label>
+            <label>property description</label>
             <textarea name="estate_description" class="estate_description"></textarea>
           </div>
 
 
           <div class="img_frame">
-            <label>agencyerty Pictures</label>
+            <label>property Pictures</label>
             <div class="media-frame">
 
               <div class="upload_img_box">
