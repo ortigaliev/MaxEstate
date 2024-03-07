@@ -41,7 +41,7 @@
                 <td><%= key + 1 %></td>
                 <td><%= value.estate_name %></td>
                 <td><%= value.estate_collection %></td>
-                <td><%= value.estate_collection === 'rent' ? value.estate_rent : value.estate_type %></td>
+                <td><%= value.estate_type %></td>
                 <td><%= value.estate_price %></td>
                 <td><%= value.estate_left_cnt %></td>
                 <td>
@@ -70,7 +70,7 @@
 
           <div>
             <div class="long_input">
-              <label>property Name</label>
+              <label>Property Name</label>
               <input type="text" placeholder="property name" name="estate_name" class="estate_name">
             </div>
             <input name="estate_status" value="PAUSED" class="estate_status" hidden>
@@ -78,7 +78,7 @@
 
           <div class="half_input_frame">
             <div class="half_input">
-              <label>Prperty Price</label>
+              <label>Property Price</label>
               <input type="number" placeholder="agencyert price" name="estate_price" class="estate_price">
             </div>
             <div class="half_input">
@@ -93,11 +93,9 @@
               <select class="estate_collection" name="estate_collection">
                 <option value="apartment" selected>Apartment</option>
                 <option value="willa">Willa</option>
-                <option value="house">Family</option>
-                <option value="house">Penthouse</option>
+                <option value="family">Family</option>
+                <option value="penthouse">Penthouse</option>
                 <option value="office">Office</option>
-                <option value="office">Rent</option>
-                <!-- <option value="rent">Rent</option> -->
                 <option value="etc">Etc</option>
               </select>
             </div>
@@ -112,7 +110,7 @@
               </select>
             </div>
 
-            <div class="half_input" id="estate_rent" style="display: none;">
+           <!--  <div class="half_input" id="estate_rent" style="display: none;">
               <label>Rent type</label>
               <select class="estate_rent" name="estate_rent">
                 <option value="apartment">Apartment</option>
@@ -121,7 +119,7 @@
                 <option value="office" >Office</option>
                 <option value="penthouse">Penthouse</option>
               </select>
-            </div>
+            </div> -->
           </div>
 
           <div class="long_input">
@@ -131,7 +129,7 @@
 
 
           <div class="img_frame">
-            <label>property Pictures</label>
+            <label>Property images</label>
             <div class="media-frame">
 
               <div class="upload_img_box">

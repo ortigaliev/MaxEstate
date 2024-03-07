@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const memberController = require("./controllers/memberController");
+const estateController = require("./controllers/estateController");
 
 //Member realted routers
 router.post("/signup", memberController.signup);
@@ -11,6 +12,13 @@ router.get(
   "/member/:id",
   memberController.retrieveAuthMember,
   memberController.getChosenMember
+);
+
+//Product related routers
+router.post(
+  "/estate",
+  memberController.retrieveAuthMember,
+  estateController.getAllEstate
 );
 
 //Others

@@ -3,19 +3,18 @@ const {
   estate_collection_enums,
   estate_status_enums,
   estate_type_enums,
-  estate_rent_enums,
 } = require("../lib/config");
 const Schema = mongoose.Schema;
 
 estateSchema = new mongoose.Schema(
   {
     estate_name: { type: String, required: true },
-    estate_collection: {
+    estate_collection: { 
       type: String,
       required: true,
       enum: {
         values: estate_collection_enums,
-        message: "{VALUE} is not among permitted enum values",
+        message: "{VALUE} is not among permitted enum values collection",
       },
     },
     estate_status: {
@@ -24,7 +23,7 @@ estateSchema = new mongoose.Schema(
       default: "PAUSED",
       enums: {
         values: estate_status_enums,
-        message: "{VALUE} is not among permitted enum values",
+        message: "{VALUE} is not among permitted enum values status",
       },
     },
     estate_price: {
@@ -44,27 +43,20 @@ estateSchema = new mongoose.Schema(
       //product size
       type: String,
       default: "for sale",
-      required: function () {
-        const typed_list = ["apartment", "willa", "office", "penthouse"];
-        return typed_list.includes(this.estate_collection);
-      },
       enum: {
         values: estate_type_enums,
-        message: "{VALUE}, is not among permitted enum values",
+        message: "{VALUE}, is not among permitted enum values type",
       },
     },
-    estate_rent: {
+    /* estate_rent: {
       //product volume
       type: String,
-      default: "월세",
-      required: function () {
-        return this.estate_collection === "rent";
-      },
+      default: "apartment",
       enum: {
         values: estate_rent_enums,
         message: "{VALUE}, is not among permitted enum values",
       },
-    },
+    }, */
     estate_description: {
       type: String,
       required: true,
