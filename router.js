@@ -21,6 +21,12 @@ router.post(
   estateController.getAllEstate
 );
 
+router.get(
+  "/estate/:id",
+  memberController.retrieveAuthMember,
+  estateController.getChosenEstate
+);
+
 //Others
 router.get("/community", (req, res) => {
   res.send("Community Page");

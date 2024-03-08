@@ -40,6 +40,25 @@ class Estate {
     }
   }
 
+  async getChosenEstateData(member, id) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member?.id);
+      id = shapeIntoMongooseObjectId(id);
+
+      const result = await this.estateModel
+        .aggregate([
+          { $match: { _id: id, estate_status: "PROCESS" } },
+          // todo: check auth member estate likes
+        ])
+        .exec();
+
+      assert.ok(result, Definer.general_err1);
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async getAllEstateDataAgency(member) {
     try {
       member._id = shapeIntoMongooseObjectId(member._id);
