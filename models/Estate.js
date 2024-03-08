@@ -2,6 +2,7 @@ const assert = require("assert");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
 const Definer = require("../lib/mistake");
 const EstateModel = require("../schema/estate.model");
+const Member = require("./Member");
 
 class Estate {
   constructor() {
@@ -44,6 +45,11 @@ class Estate {
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?.id);
       id = shapeIntoMongooseObjectId(id);
+
+      if (member) {
+        const member_obj = new Member();
+        member_obj.viewChosenItemByMember(member, id, "estate");
+      }
 
       const result = await this.estateModel
         .aggregate([

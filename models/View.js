@@ -1,10 +1,12 @@
 const ViewModel = require("../schema/view.model");
-const memberModel = require("../schema/member.model");
+const MemberModel = require("../schema/member.model");
+const EstateModel = require("../schema/estate.model");
 
 class View {
   constructor(mb_id) {
     this.viewModel = ViewModel;
-    this.memberModel = memberModel;
+    this.memberModel = MemberModel;
+    this.estateModel = EstateModel;
     this.mb_id = mb_id;
   }
 
@@ -12,9 +14,16 @@ class View {
     try {
       let result;
       switch (group_type) {
+        //Member view logic
         case "member":
           result = await this.memberModel
             .findById({ _id: view_ref_id, mb_status: "ACTIVE" })
+            .exec();
+          break;
+        //Estate view logic
+        case "estate":
+          result = await this.estateModel
+            .findById({ _id: view_ref_id, mb_status: "PROCESS" })
             .exec();
           break;
       }
@@ -46,9 +55,20 @@ class View {
   async modifyItemViewCounts(view_ref_id, group_type) {
     try {
       switch (group_type) {
+        //Member view increment logic
         case "member":
           await this.memberModel
             .findByIdAndUpdate({ _id: view_ref_id }, { $inc: { mb_views: 1 } })
+            .exec();
+          break;
+
+        //Estate view increment logic
+        case "estate":
+          await this.estateModel
+            .findByIdAndUpdate(
+              { _id: view_ref_id },
+              { $inc: { estate_views: 1 } }
+            )
             .exec();
           break;
       }
