@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const memberController = require("./controllers/memberController");
 const estateController = require("./controllers/estateController");
+const agencyController = require("./controllers/agencyController");
 
 //Member realted routers
 router.post("/signup", memberController.signup);
@@ -14,7 +15,7 @@ router.get(
   memberController.getChosenMember
 );
 
-//Product related routers
+//Estate related routers
 router.post(
   "/estate",
   memberController.retrieveAuthMember,
@@ -27,6 +28,17 @@ router.get(
   estateController.getChosenEstate
 );
 
+//Agency related routers
+router.get(
+  "/agencies",
+  memberController.retrieveAuthMember,
+  agencyController.getAgencies
+);
+/* router.get(
+  "/agencies/:id",
+  memberController.retrieveAuthMember,
+  agencyController.getChosenAgency
+); */
 //Others
 router.get("/community", (req, res) => {
   res.send("Community Page");

@@ -48,7 +48,7 @@ class Estate {
 
       if (member) {
         const member_obj = new Member();
-        member_obj.viewChosenItemByMember(member, id, "estate");
+        await member_obj.viewChosenItemByMember(member, id, "estate");
       }
 
       const result = await this.estateModel

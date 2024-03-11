@@ -3,7 +3,38 @@ const Estate = require("../models/Estate");
 const Agency = require("../models/Agency");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
+
 let agencyController = module.exports;
+
+agencyController.getAgencies = async (req, res) => {
+  try {
+    console.log("GET: cont/getAgencies");
+    const data = req.query,
+      agency = new Agency(),
+      result = await agency.getAgenciesData(req.member, data);
+    res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR, cont/getAgencies, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
+
+/* agencyController.getChosenAgency = async (req, res) => {
+  try {
+    console.log("GET: cont/getChosenAgency");
+    const id = req.params.id,
+      agency = new Agency(),
+      result = await agency.getChosenAgencyData(req.member, id);
+
+    res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR, cont/getChosenAgency, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+}; */
+/****************************************
+ *          BSSR RELATED METHODS        *
+ ****************************************/
 
 agencyController.home = (req, res) => {
   try {
@@ -45,7 +76,7 @@ agencyController.signupProcess = async (req, res) => {
     let new_member = req.body;
     new_member.mb_type = "AGENCY";
     // new_member.mb_image = req.file.path;
-    new_member.mb_image = req.file.path.replace(/\\/g, '/');
+    new_member.mb_image = req.file.path.replace(/\\/g, "/");
 
     const member = new Member();
     const result = await member.signupData(new_member);
