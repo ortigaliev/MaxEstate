@@ -19,7 +19,7 @@ agencyController.getAgencies = async (req, res) => {
   }
 };
 
-/* agencyController.getChosenAgency = async (req, res) => {
+agencyController.getChosenAgency = async (req, res) => {
   try {
     console.log("GET: cont/getChosenAgency");
     const id = req.params.id,
@@ -31,7 +31,7 @@ agencyController.getAgencies = async (req, res) => {
     console.log(`ERROR, cont/getChosenAgency, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}; */
+};
 /****************************************
  *          BSSR RELATED METHODS        *
  ****************************************/

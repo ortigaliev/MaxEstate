@@ -2,6 +2,7 @@ const MemberModel = require("../schema/member.model");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
+const Member = require("../models/Member");
 
 class Agency {
   constructor() {
@@ -45,7 +46,7 @@ class Agency {
     }
   }
 
-  /* async getChosenAgencyData(member, id) {
+  async getChosenAgencyData(member, id) {
     try {
       id = shapeIntoMongooseObjectId(id);
 
@@ -63,7 +64,7 @@ class Agency {
     } catch (err) {
       throw err;
     }
-  } */
+  }
 
   async getAllAgencyData() {
     try {

@@ -34,11 +34,11 @@ router.get(
   memberController.retrieveAuthMember,
   agencyController.getAgencies
 );
-/* router.get(
+router.get(
   "/agencies/:id",
   memberController.retrieveAuthMember,
   agencyController.getChosenAgency
-); */
+);
 //Others
 router.get("/community", (req, res) => {
   res.send("Community Page");
