@@ -52,6 +52,11 @@ router.get(
   memberController.retrieveAuthMember,
   orderController.getMyOrders
 );
+router.post(
+  "/orders/edit",
+  memberController.retrieveAuthMember,
+  orderController.editChosenOrder
+);
 
 //Others
 router.get("/community", (req, res) => {
