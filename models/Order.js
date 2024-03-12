@@ -81,7 +81,7 @@ class Order {
         item_quantity: item["quantity"],
         item_price: item["price"],
         order_id: order_id,
-        product_id: item["_id"],
+        estate_id: item["_id"],
       });
       const result = await order_item.save();
       assert.ok(result, Definer.order_err2);
@@ -90,6 +90,41 @@ class Order {
     } catch (err) {
       console.log(err);
       throw new Error(Definer.order_err2);
+    }
+  }
+
+  async getMyOrdersData(member, query) {
+    try {
+      const mb_id = shapeIntoMongooseObjectId(member._id),
+        order_status = query.status.toUpperCase(),
+        matches = { mb_id: mb_id, order_status: order_status };
+
+      const result = await this.orderModel
+        .aggregate([
+          { $match: matches },
+          { $sort: { createdAt: -1 } },
+          {
+            $lookup: {
+              from: "orderitems",
+              localField: "_id",
+              foreignField: "order_id",
+              as: "order_items",
+            },
+          },
+          {
+            $lookup: {
+              from: "estates",
+              localField: "order_items.estate_id",
+              foreignField: "_id",
+              as: "estate_data",
+            },
+          },
+        ])
+        .exec();
+
+      return result;
+    } catch (err) {
+      throw err;
     }
   }
 }
