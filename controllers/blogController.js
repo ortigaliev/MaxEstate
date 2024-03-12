@@ -16,3 +16,14 @@ blogController.imageInsertion = async (req, res) => {
     res.json({ state: "fail", message: err.message });
   }
 };
+
+blogController.createBlog = async (req, res) => {
+  try {
+    console.log(`POST: cont/createBlog`);
+
+    //Blog service model
+  } catch (err) {
+    console.log(`ERROR, cont/createBlog, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};

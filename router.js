@@ -67,6 +67,11 @@ router.post(
   uploader_community.single("blog_image"),
   blogController.imageInsertion
 );
+router.post(
+  "/blog/create",
+  memberController.retrieveAuthMember,
+  blogController.createBlog
+);
 
 //Others
 router.get("/community", (req, res) => {
