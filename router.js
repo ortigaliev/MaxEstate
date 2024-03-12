@@ -3,6 +3,7 @@ const router = express.Router();
 const memberController = require("./controllers/memberController");
 const estateController = require("./controllers/estateController");
 const agencyController = require("./controllers/agencyController");
+const orderController = require("./controllers/orderController");
 
 //Member realted routers
 router.post("/signup", memberController.signup);
@@ -39,6 +40,14 @@ router.get(
   memberController.retrieveAuthMember,
   agencyController.getChosenAgency
 );
+
+//Order related routers
+router.post(
+  "/orders/create",
+  memberController.retrieveAuthMember,
+  orderController.createOrder
+);
+
 //Others
 router.get("/community", (req, res) => {
   res.send("Community Page");
