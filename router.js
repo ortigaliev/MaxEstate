@@ -73,9 +73,4 @@ router.post(
   blogController.createBlog
 );
 
-//Others
-router.get("/community", (req, res) => {
-  res.send("Community Page");
-});
-
 module.exports = router;
