@@ -4,6 +4,9 @@ const memberController = require("./controllers/memberController");
 const estateController = require("./controllers/estateController");
 const agencyController = require("./controllers/agencyController");
 const orderController = require("./controllers/orderController");
+const blogController = require("./controllers/blogController");
+const uploader_community = require("./utils/upload-multer")("blog");
+const uploader_member = require("./utils/upload-multer")("members");
 
 //Member realted routers
 router.post("/signup", memberController.signup);
@@ -56,6 +59,13 @@ router.post(
   "/orders/edit",
   memberController.retrieveAuthMember,
   orderController.editChosenOrder
+);
+
+//Blog related routers
+router.post(
+  "/blog/image",
+  uploader_community.single("blog_image"),
+  blogController.imageInsertion
 );
 
 //Others
