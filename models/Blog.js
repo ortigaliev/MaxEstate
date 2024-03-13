@@ -1,7 +1,10 @@
 const BoBlogModel = require("../schema/bo_blog.model");
 const Definer = require("../lib/mistake");
 const assert = require("assert");
-const { shapeIntoMongooseObjectId } = require("../lib/config");
+const {
+  shapeIntoMongooseObjectId,
+  board_id_enum_list,
+} = require("../lib/config");
 
 class Blog {
   constructor() {
@@ -55,6 +58,45 @@ class Blog {
       assert.ok(result, Definer.article_err2);
 
       return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getBlogsData(member, inquery) {
+    try {
+      const auth_mb_id = shapeIntoMongooseObjectId(member._id);
+      let matches =
+        inquery.blog_id === "all"
+          ? { blog_id: { $in: board_id_enum_list }, blog_status: "active" }
+          : { blog_id: inquery.blog_id, blog_status: "active" };
+      inquery.limit *= 1;
+      inquery.pahe *= 1;
+      const sort = inquery.order
+        ? { [`${inquery.order}`]: -1 }
+        : { createdAt: -1 };
+      const result = await this.boBlogModel
+        .aggregate([
+          { $match: matches },
+          { $sort: sort },
+          { $skip: (inquery.page - 1) * inquery.limit },
+          { $limit: inquery.limit },
+          {
+            $lookup: {
+              from: "members",
+              localField: "mb_id",
+              foreignField: "_id",
+              as: "member_data",
+            },
+          },
+          { $unwind: "$member_data" },
+        ])
+        .exec();
+
+        console.log("result::", result);
+        assert.ok(result, Definer.article_err3)
+
+        return result
     } catch (err) {
       throw err;
     }

@@ -17,13 +17,13 @@ class View {
         //Member view logic
         case "member":
           result = await this.memberModel
-            .findById({ _id: view_ref_id, mb_status: "ACTIVE" })
+            .findOne({ _id: view_ref_id, mb_status: "ACTIVE" })
             .exec();
           break;
         //Estate view logic
         case "estate":
           result = await this.estateModel
-            .findById({ _id: view_ref_id, estate_status: "PROCESS" })
+            .findOne({ _id: view_ref_id, estate_status: "PROCESS" })
             .exec();
           break;
       }

@@ -73,9 +73,13 @@ router.post(
   blogController.createBlog
 );
 router.get(
-  "/Blog/articles",
+  "/blog/articles",
   memberController.retrieveAuthMember,
   blogController.getMemberBlogs
 );
-
+router.get(
+  "/blog/target",
+  memberController.retrieveAuthMember,
+  blogController.getBlogs
+);
 module.exports = router;

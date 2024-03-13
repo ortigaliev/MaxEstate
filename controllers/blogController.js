@@ -41,15 +41,24 @@ blogController.getMemberBlogs = async (req, res) => {
     const mb_id =
       req.query.mb_id !== "none" ? req.query.mb_id : req.member?._id;
     assert.ok(mb_id, Definer.article_err1);
-    const result = await blog.getMemberBlogsData(
-      req.member,
-      mb_id,
-      req.query
-    );
+    const result = await blog.getMemberBlogsData(req.member, mb_id, req.query);
 
     res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/getMemberBlogs, ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
+};
+
+blogController.getBlogs = async (req, res) => {
+  try {
+    console.log(`GET: cont/getBlogs`);
+    const blog = new Blog(),
+      result = await blog.getBlogsData(req.member, req.query);
+
+    res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR, cont/getBlogs, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
