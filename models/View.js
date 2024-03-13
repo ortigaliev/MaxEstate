@@ -23,7 +23,7 @@ class View {
         //Estate view logic
         case "estate":
           result = await this.estateModel
-            .findById({ _id: view_ref_id, mb_status: "PROCESS" })
+            .findById({ _id: view_ref_id, estate_status: "PROCESS" })
             .exec();
           break;
       }
