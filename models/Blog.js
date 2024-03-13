@@ -5,6 +5,7 @@ const {
   shapeIntoMongooseObjectId,
   board_id_enum_list,
 } = require("../lib/config");
+const Member = require("./Member");
 
 class Blog {
   constructor() {
@@ -55,7 +56,7 @@ class Blog {
           { $unwind: "$member_data" },
         ])
         .exec();
-      assert.ok(result, Definer.article_err2);
+      assert.ok(result, Definer.blogicle_err2);
 
       return result;
     } catch (err) {
@@ -65,13 +66,13 @@ class Blog {
 
   async getBlogsData(member, inquery) {
     try {
-      const auth_mb_id = shapeIntoMongooseObjectId(member._id);
+      const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       let matches =
         inquery.blog_id === "all"
           ? { blog_id: { $in: board_id_enum_list }, blog_status: "active" }
           : { blog_id: inquery.blog_id, blog_status: "active" };
       inquery.limit *= 1;
-      inquery.pahe *= 1;
+      inquery.page *= 1;
       const sort = inquery.order
         ? { [`${inquery.order}`]: -1 }
         : { createdAt: -1 };
@@ -93,10 +94,28 @@ class Blog {
         ])
         .exec();
 
-        console.log("result::", result);
-        assert.ok(result, Definer.article_err3)
+      console.log("result::", result);
+      assert.ok(result, Definer.blog_err3);
 
-        return result
+      return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getChosenBlogData(member, bo_id) {
+    try {
+      bo_id = shapeIntoMongooseObjectId(bo_id);
+
+      if (member) {
+        const member_obj = new Member();
+        await member_obj.viewChosenItemByMember(member, bo_id, "blog");
+      }
+
+      const result = await this.boBlogModel.findById({ _id: bo_id }).exec();
+      assert.ok(result, Definer.blog_err3);
+
+      return result;
     } catch (err) {
       throw err;
     }

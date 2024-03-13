@@ -82,4 +82,9 @@ router.get(
   memberController.retrieveAuthMember,
   blogController.getBlogs
 );
+router.get(
+  "/blog/single-blog/:bo_id",
+  memberController.retrieveAuthMember,
+  blogController.getChosenBlog
+);
 module.exports = router;

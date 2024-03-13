@@ -1,12 +1,13 @@
 const ViewModel = require("../schema/view.model");
 const MemberModel = require("../schema/member.model");
 const EstateModel = require("../schema/estate.model");
-
+const BoBlogModel = require("../schema/bo_blog.model");
 class View {
   constructor(mb_id) {
     this.viewModel = ViewModel;
     this.memberModel = MemberModel;
     this.estateModel = EstateModel;
+    this.boBlogModel = BoBlogModel;
     this.mb_id = mb_id;
   }
 
@@ -24,6 +25,15 @@ class View {
         case "estate":
           result = await this.estateModel
             .findOne({ _id: view_ref_id, estate_status: "PROCESS" })
+            .exec();
+          break;
+        //Blog view logic
+        case "blog":
+          result = await this.boBlogModel
+            .findOne({
+              _id: view_ref_id,
+              blog_status: "active",
+            })
             .exec();
           break;
       }
@@ -68,6 +78,15 @@ class View {
             .findByIdAndUpdate(
               { _id: view_ref_id },
               { $inc: { estate_views: 1 } }
+            )
+            .exec();
+          break;
+        //Blog view increment logic
+        case "blog":
+          await this.boBlogModel
+            .findByIdAndUpdate(
+              { _id: view_ref_id },
+              { $inc: { blog_views: 1 } }
             )
             .exec();
           break;
