@@ -40,7 +40,7 @@ blogController.getMemberBlogs = async (req, res) => {
     const blog = new Blog();
     const mb_id =
       req.query.mb_id !== "none" ? req.query.mb_id : req.member?._id;
-    assert.ok(mb_id, Definer.blogicle_err1);
+    assert.ok(mb_id, Definer.blog_err1);
     const result = await blog.getMemberBlogsData(req.member, mb_id, req.query);
 
     res.json({ state: "success", data: result });
