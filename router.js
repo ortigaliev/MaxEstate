@@ -5,6 +5,7 @@ const estateController = require("./controllers/estateController");
 const agencyController = require("./controllers/agencyController");
 const orderController = require("./controllers/orderController");
 const blogController = require("./controllers/blogController");
+const followController = require("./controllers/followController");
 const uploader_community = require("./utils/upload-multer")("blog");
 const uploader_member = require("./utils/upload-multer")("members");
 
@@ -87,4 +88,12 @@ router.get(
   memberController.retrieveAuthMember,
   blogController.getChosenBlog
 );
+
+//following related routers
+router.post(
+  "/follow/subscribe",
+  memberController.retrieveAuthMember,
+  followController.subscribe
+);
+
 module.exports = router;
