@@ -94,7 +94,6 @@ class Blog {
         ])
         .exec();
 
-      console.log("result::", result);
       assert.ok(result, Definer.blog_err3);
 
       return result;
