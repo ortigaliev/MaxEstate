@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 estateSchema = new mongoose.Schema(
   {
     estate_name: { type: String, required: true },
-    estate_collection: { 
+    estate_collection: {
       type: String,
       required: true,
       enum: {

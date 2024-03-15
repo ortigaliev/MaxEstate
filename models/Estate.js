@@ -30,7 +30,7 @@ class Estate {
           { $sort: sort },
           { $skip: (data.page * 1 - 1) * data.limit },
           { $limit: data.limit * 1 },
-          //TODO: check auth member estate product likes
+          //TODO: check auth member estate estate likes
         ])
         .exec();
 
@@ -87,7 +87,7 @@ class Estate {
       const new_estate = new this.estateModel(data);
       const result = await new_estate.save();
 
-      assert.ok(result, Definer.product_err1);
+      assert.ok(result, Definer.estate_err1);
       return result;
     } catch (err) {
       throw err;

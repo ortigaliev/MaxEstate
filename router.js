@@ -19,6 +19,12 @@ router.get(
   memberController.retrieveAuthMember,
   memberController.getChosenMember
 );
+//Like related router
+router.post(
+  "/member-liken",
+  memberController.retrieveAuthMember,
+  memberController.likeMemberChosen
+);
 
 //Estate related routers
 router.post(
