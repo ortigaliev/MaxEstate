@@ -42,7 +42,7 @@ followController.getMemberFollowings = async (req, res) => {
 
     res.json({ state: "success", data: result });
   } catch (err) {
-    onsole.log(`ERROR, cont/getMemberFollowings, ${err.message}`);
+    console.log(`ERROR, cont/getMemberFollowings, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };

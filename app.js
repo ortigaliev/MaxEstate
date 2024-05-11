@@ -50,7 +50,7 @@ app.set("views", "views"); //views folder path that we created
 app.set("view engine", "ejs");
 
 //4-Router related Code
-app.use("/agency", router_bssr); //
-app.use("/", router); //This router availabes only for Admin and Agency admin users
+app.use("/agency", router_bssr); //This router availabes only for Admin and Agency admin users
+app.use("/", router);
 
 module.exports = app;

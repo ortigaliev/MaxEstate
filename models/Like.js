@@ -33,8 +33,8 @@ class Like {
             })
             .exec();
           break;
-        case "community":
-          result = await this.boArticleModel
+        case "blog":
+          result = await this.boBlogModel
             .findOne({
               _id: id,
               blog_status: "active",
@@ -121,8 +121,8 @@ class Like {
             )
             .exec();
           break;
-        case "community":
-          await this.boArticleModel
+        case "blog":
+          await this.boBlogModel
             .findByIdAndUpdate(
               {
                 _id: like_ref_id,

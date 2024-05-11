@@ -10,7 +10,7 @@ const boBlogSchema = new mongoose.Schema(
     blog_subject: { type: String, required: true },
     blog_content: { type: String, required: true },
     blog_image: { type: String, required: false },
-    blog_id: {
+    bo_id: {
       type: String,
       required: true,
       enum: {

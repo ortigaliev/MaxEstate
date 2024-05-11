@@ -125,7 +125,7 @@ agencyController.logout = (req, res) => {
   try {
     console.log("GET cont/logout");
     req.session.destroy(function () {
-      res.redirect("/prop");
+      res.redirect("/agency");
     });
   } catch (err) {
     console.log(`ERROR, cont/logout, ${err.message}`);

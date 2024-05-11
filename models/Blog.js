@@ -70,9 +70,9 @@ class Blog {
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       let matches =
-        inquiry.blog_id === "all"
-          ? { blog_id: { $in: board_id_enum_list }, blog_status: "active" }
-          : { blog_id: inquiry.blog_id, blog_status: "active" };
+        inquiry.bo_id === "all"
+          ? { bo_id: { $in: board_id_enum_list }, blog_status: "active" }
+          : { bo_id: inquiry.bo_id, blog_status: "active" };
       inquiry.limit *= 1;
       inquiry.page *= 1;
       const sort = inquiry.order
