@@ -40,7 +40,7 @@
               <tbody style="background: white">
                 <td><%= key + 1 %></td>
                 <td><%= value.estate_name %></td>
-                <td><%= value.estate_type %></td>
+                <td><%= value.estate_collection %></td>
                 <td><%= value.estate_category %></td>
                 <td><%= value.estate_price %></td>
                 <td><%= value.estate_left_cnt %></td>
@@ -68,62 +68,105 @@
             <span class="new_estate_text">New property</span>
           </div>
 
-          <div>
-            <div class="long_input">
-              <label>Property Name</label>
-              <input type="text" placeholder="property name" name="estate_name" class="estate_name">
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Estate Name</label>
+              <input type="text" placeholder="Estate Name" name="estate_name" class="estate_name">
+            </div>
+            <div class="half_input">
+              <label>Estate ID</label>
+              <input type="text" placeholder="Estate ID" name="estate_id" class="estate_id">
             </div>
             <input name="estate_status" value="PAUSED" class="estate_status" hidden>
           </div>
 
           <div class="half_input_frame">
             <div class="half_input">
-              <label>Property Price</label>
-              <input type="number" placeholder="agencyert price" name="estate_price" class="estate_price">
+              <label>Estate Year Build</label>
+              <input type="number" placeholder="When it was built?" name="estate_year_build" class="estate_year_build">
             </div>
             <div class="half_input">
-              <label>Availability Count</label>
-              <input type="number" placeholder="Aviable property" name="estate_left_cnt" class="estate_left_cnt">
+              <label>Estate Area</label>
+              <input type="number" placeholder="Estate Area(square)" name="estate_area" class="estate_area">
             </div>
           </div>
 
           <div class="half_input_frame">
             <div class="half_input">
-              <label>property type</label>
+              <label>Estate Price</label>
+              <input type="number" placeholder="Estate price" name="estate_price" class="estate_price">
+            </div>
+            <div class="half_input">
+              <label>Availability Count</label>
+              <input type="number" placeholder="Aviable estate" name="estate_left_cnt" class="estate_left_cnt">
+            </div>
+          </div>
+
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Estate type</label>
               <select class="estate_collection" name="estate_collection">
-                <option value="apartment" selected>Apartment</option>
-                <option value="willa">Willa</option>
-                <option value="family">Family</option>
-                <option value="penthouse">Penthouse</option>
+                <option value="house">House</option>
                 <option value="office">Office</option>
+                <option value="willa">Willa</option>
+                <option value="luxary home">Luxary Home</option>
+                <option value="apartment" selected>Apartment</option>
+                <option value="studio">Studio</option>
+                <option value="single family">Single Family</option>
+                <option value="business center">Business Center</option>
+                <option value="penthouse">Penthouse</option>
                 <option value="etc">Etc</option>
               </select>
             </div>
 
-            <div class="half_input" id="estate_type">
-              <label>property for</label>
-              <select class="estate_type" name="estate_type">
-                <option value="for sale">For Sale</option>
-                <option value="rent" selected>Rent</option>
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
+            <div class="half_input" id="estate_amenities">
+              <label>Estate Aminities</label>
+              <select class="estate_amenities" name="estate_amenities">
+                <option value="swimming-pool">Swimming-pool</option>
+                <option value="parking" selected>Parking</option>
+                <option value="library">Library</option>
+                <option value="medical-center">Medical-center</option>
+                <option value="kids-playground">Kids-playground</option>
+                <option value="private-security">Private-security</option>
+                <option value="smart-home">Smart-home</option>
               </select>
             </div>
+          </div>
 
-           <!--  <div class="half_input" id="estate_rent" style="display: none;">
-              <label>Rent type</label>
-              <select class="estate_rent" name="estate_rent">
-                <option value="apartment">Apartment</option>
-                <option value="willa">Willa</option>
-                <option value="family" selected>Family</option>
-                <option value="office" >Office</option>
-                <option value="penthouse">Penthouse</option>
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Estate category</label>
+              <select class="estate_category" name="estate_category">
+                <option value="For Buy">For Buy</option>
+                <option value="For Rent" selected>For Rent</option>
+                <option value="For Sell">For Sell</option>
+                <option value="For Sale">For Sale</option>
               </select>
-            </div> -->
+            </div>
+            <div class="half_input">
+              <label>Estate Rooms</label>
+              <input type="number" placeholder="How many rooms does it have?" name="estate_rooms" class="estate_rooms">
+            </div>
+          </div>
+
+          <div class="half_input_frame">
+            <div class="half_input">
+              <label>Estate bath</label>
+              <input type="number" placeholder="Estate Bath Count" name="estate_bath" class="estate_bath">
+            </div>
+            <div class="half_input">
+              <label>Estate bed</label>
+              <input type="number" placeholder="Estate Bed Count" name="estate_bed" class="estate_bed">
+            </div>
           </div>
 
           <div class="long_input">
-            <label>property description</label>
+              <label>Estate Adress</label>
+              <input type="text" placeholder="Please enter estate address!" name="estate_address" class="estate_address">
+          </div>
+
+          <div class="long_input">
+            <label>Estate description</label>
             <textarea name="estate_description" class="estate_description"></textarea>
           </div>
 
@@ -224,13 +267,22 @@
     function validateForm() {
       const agency_mb_id = $(".agency_mb_id").val(),
       estate_name = $(".estate_name").val(),
+      estate_id = $(".estate_id").val(),
+      estate_year_build = $(".estate_year_build").val(),
+      estate_area = $(".estate_area").val(),
       estate_price = $(".estate_price").val(),
       estate_left_cnt= $(".estate_left_cnt").val(),
       estate_collection = $(".estate_collection").val(),
+      estate_amenities = $(".estate_amenities").val(),
+      estate_category = $(".estate_category").val(),
+      estate_rooms = $(".estate_rooms").val(),
+      estate_bath = $(".estate_bath").val(),
+      estate_bed = $(".estate_bed").val(),
+      estate_address = $(".estate_address").val(),
       estate_description = $(".estate_description").val(),
       estate_status = $(".estate_status").val();
 
-      if(agency_mb_id == '' || estate_name == '' || estate_price == '' || estate_left_cnt == '' || estate_collection == '' || estate_description == '' || estate_status == '' ) {
+      if(agency_mb_id == '' || estate_name == '' || estate_id == '' || estate_year_build == '' || estate_area == '' || estate_price == '' || estate_left_cnt == '' || estate_collection == '' || estate_amenities == '' || estate_category == '' || estate_rooms == '' || estate_bath == '' || estate_bed == '' || estate_address == '' ||  estate_description == '' || estate_status == '' ) {
         alert(`Please fill all input!`);
         return false;
       } else return true;

@@ -27,6 +27,7 @@ estateSchema = new mongoose.Schema(
 
     estate_collection: {
       type: String,
+      default: "apartment",
       required: true,
       enum: {
         values: estate_type_enums,
@@ -87,7 +88,7 @@ estateSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    estate_type: {
+    /*  estate_type: {
       //product size
       type: String,
       default: "apartment",
@@ -95,7 +96,7 @@ estateSchema = new mongoose.Schema(
         values: estate_type_enums,
         message: "{VALUE}, is not among permitted enum values type",
       },
-    },
+    }, */
     estate_category: {
       //product volume
       type: String,
@@ -112,6 +113,10 @@ estateSchema = new mongoose.Schema(
         values: estate_amenity_enums,
         message: "{VALUE}, is not among permitted enum values",
       },
+    },
+    estate_address: {
+      type: String,
+      required: true,
     },
     estate_description: {
       type: String,
@@ -142,7 +147,7 @@ estateSchema = new mongoose.Schema(
 ); //createdAt, updeatedAt
 
 estateSchema.index(
-  { agency_mb_id: 1, estate_name: 1, estate_type: 1 }, //Doesnt allow add new product with same param 2 restaurant
+  { agency_mb_id: 1, estate_name: 1, estate_collection: 1 }, //Doesnt allow add new product with same param 2 restaurant
   { unique: true }
 );
 

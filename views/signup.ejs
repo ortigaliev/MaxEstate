@@ -74,6 +74,21 @@
           </div>
         </div>
 
+        <!-- ADDRESS SECTION -->
+        <div class="sign_input_frame">
+          <div class="sign_up_address_frame">
+            <label>Address</label>
+            <input
+              class="mb_address"
+              type="text"
+              name="mb_address"
+              placeholder="Address"
+              value=""
+              required
+            />
+          </div>
+        </div>
+
         <div class="login_input_frame">
           <div class="media-frame">
             <img
@@ -144,13 +159,15 @@
         const mb_phone = $(".mb_phone").val();
         const mb_password = $(".mb_password").val();
         const mb_confirm_password = $(".mb_confirm_password").val();
+        const mb_address = $(".mb_address").val();
         const agency_img = $(".agency_img").get(0).files[0] ?? null;
 
         if (
           mb_nick == "" ||
           mb_phone == "" ||
           mb_password == "" ||
-          mb_confirm_password == ""
+          mb_confirm_password == "" ||
+          mb_address == ""
         ) {
           alert("Please complete all the fields");
           return false;

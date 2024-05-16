@@ -54,7 +54,7 @@ agencyController.getMyAgencyEstate = async (req, res) => {
     res.render("agency-list", { agency_data: data });
   } catch (err) {
     console.log(`ERROR, cont/getMyAgencyEstate, ${err.message}`);
-    res.redirect("/prop");
+    res.redirect("/agency");
   }
 };
 
@@ -162,7 +162,7 @@ agencyController.validateAdmin = (req, res, next) => {
   } else {
     const html = `<script>
                     alert('Admin page: Permission denied!');
-                    window.location.replace('/prop');
+                    window.location.replace('/agency');
                   </script>`;
     res.end(html);
   }
