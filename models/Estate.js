@@ -19,9 +19,28 @@ class Estate {
       let match = { estate_status: "PROCESS" };
       if (data.agency_mb_id) {
         match["agency_mb_id"] = shapeIntoMongooseObjectId(data.agency_mb_id);
+      }
+      if (data.estate_collection) {
         match["estate_collection"] = data.estate_collection;
       }
+      if (data.estate_price_range) {
+        match["estate_price_range"] = data.estate_price_range;
+      }
 
+      if (data.estate_bed_bath_count) {
+        match["estate_bed_bath_count"] = data.estate_bed_bath_count;
+      }
+
+      if (data.estate_category) {
+        match["estate_category"] = data.estate_category;
+      }
+
+      if (data.estate_amenities) {
+        match["estate_amenities"] = data.estate_amenities;
+      }
+      if (data.estate_price) {
+        match["estate_price"] = { $gte: data.estate_price };
+      }
       const sort =
         data.order === "estate_price"
           ? { [data.order]: 1 }
