@@ -41,10 +41,12 @@ class Estate {
       if (data.estate_price) {
         match["estate_price"] = { $gte: data.estate_price };
       }
-      const sort =
-        data.order === "estate_price"
-          ? { [data.order]: 1 }
-          : { [data.order]: -1 };
+      let sort = { [data.order]: 1 };
+      if (data.order === "low_to_high") {
+        sort = { ["estate_price"]: 1 };
+      } else if (data.order === "high_to_low") {
+        sort = { ["estate_price"]: -1 };
+      }
 
       const result = await this.estateModel
         .aggregate([
