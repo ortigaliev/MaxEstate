@@ -49,6 +49,10 @@ const memberSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    mb_email: {
+      type: String,
+      required: false,
+    },
     mb_description: {
       type: String,
       required: false,

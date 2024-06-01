@@ -138,6 +138,7 @@ class Member {
         mb_nick: data.mb_nick,
         member_phone: data.mb_phone,
         mb_address: data.mb_address,
+        mb_email: data.mb_email,
         mb_description: data.mb_description,
         mb_image: image ? image.path : null,
       };
