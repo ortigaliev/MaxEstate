@@ -26,6 +26,13 @@ router.post(
   memberController.likeMemberChosen
 );
 
+router.post(
+  "/member/update",
+  memberController.retrieveAuthMember,
+  uploader_member.single("mb_image"),
+  memberController.updateMember
+);
+
 //Estate related routers
 router.post(
   "/estate",
