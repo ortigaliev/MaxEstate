@@ -6,6 +6,7 @@ const router = require("./router");
 const router_bssr = require("./router_bssr");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const http = require("http");
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session); //mongodb ni storege hosil qilishga yordam beradi
@@ -53,4 +54,32 @@ app.set("view engine", "ejs");
 app.use("/agency", router_bssr); //This router availabes only for Admin and Agency admin users
 app.use("/", router);
 
-module.exports = app;
+const server = http.createServer(app);
+
+/**SOCKET.IO BACKEND SERVER */
+const io = require("socket.io")(server, {
+  serverClient: false,
+  origins: "*:*",
+  transport: ["websocket", "xhr-polling"],
+});
+
+let online_users = 0;
+io.on("connection", function (socket) {
+  online_users++;
+  console.log("New user, total:", online_users);
+  socket.emit("greetMsg", { text: "welcome" });
+  io.emit("infoMsg", { total: online_users });
+
+  socket.on("disconnect", function () {
+    online_users--;
+    socket.broadcast.emit("infoMsg", { total: online_users });
+    console.log("client disconnected, total:", online_users);
+  });
+
+  socket.on("createMsg", function (data) {
+    console.log(data);
+    io.emit("newMsg", data);
+  });
+});
+/**SOCKET.IO BACKEND SERVER */
+module.exports = server;
