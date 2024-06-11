@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #PRODUCTION
-git checkut master
+git checkout master
 git reset --hard
 git pull origin master
 npm i
