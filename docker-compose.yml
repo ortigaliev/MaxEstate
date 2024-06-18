@@ -1,0 +1,22 @@
+version: "1.1"
+
+services:
+  node:
+    container_name: "MaxEstate_BackEnd"
+    restart: always
+    image: node:16.10.0
+    ports:
+      - 3001:3001
+    volumes:
+      - ./:/user/src/app
+      - /usr/src/app/node_modules
+    working_dir: /user/src/app
+
+    networks:
+      - MaxEstate_network
+
+    command: bash -c "npm install && npm run start:prod"
+
+networks:
+  MaxEstate_network:
+    driver: bridge
