@@ -58,7 +58,7 @@ const server = http.createServer(app);
 
 /**SOCKET.IO BACKEND SERVER */
 const io = require("socket.io")(server, {
-  serverClient: false,
+  serveClient: false,
   origins: "*:*",
   transport: ["websocket", "xhr-polling"],
 });
